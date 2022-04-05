@@ -16,29 +16,38 @@ let typeOfLevel = [100, 81, 49]
 // aggiunto l'evento al bottone
 button.addEventListener(`click`,startGame)
 
-// al click del tasto play verra generato la griglia di caselle in base alla difficolta scelta
+// al click del tasto play verrà generata la griglia di caselle in base alla difficoltà scelta
 function startGame() {
+    // pulisco l'area dei box all'inizio della funzione
     box.innerHTML = '';
+
     // scelgo il livello
     const selLevel = parseInt(level.value);
-//console.log(`selLevel`, selLevel);
+//console.log(`level`, selLevel);
     //stabilisco il numero di celle in base al livello
     const cellCount = typeOfLevel[selLevel];
-//console.log(`cellCount`, cellCount);
-    // calcolo le celle
+//console.log(`cells`, cellCount);
+    // calcolo le celle calcolando le radici dei numeri nel array
     const boxCell = Math.sqrt(cellCount);
-    // stampo le celle
-    for ( let cellNum = 1; cellNum <= cellCount; cellNum++){
+//console.log(cellCount);
 
+    // creo un ciclo per le varie difficoltà 
+    for ( let i = 1; i <= cellCount; i++){
+        // creo una costante dei elementi creati
         const cellElement = document.createElement(`div`);
+        // aggiungo una classe all'elemento creato precedentemente
         cellElement.classList.add(`cell`);
-        cellElement.innerHTML = cellNum;
+        // stampo in html i numeri ciclati
+        cellElement.innerHTML = i;
+        // calcolo l'altezza e la larghezza della griglia
         cellElement.style.width = `calc(100% / ${boxCell})`;
         cellElement.style.height = `calc(100% / ${boxCell})`;
+        // creo un evento per cambiate il colore dello sfondo al click del pulsante
         cellElement.addEventListener(`click`, () => {
-// cambio colore al click
+        // cambio colore al click
         cellElement.classList.toggle(`bg_box`);
         });
+        // appendo gli elementi creati nel contenitore delle celle
         box.append(cellElement);
 //console.log(cellNum);
     }
